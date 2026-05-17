@@ -1,13 +1,4 @@
-## 👥 Development Team
-* **Moeed S-E**
-* **Haseeb**
-* **Mohsin**
-* **Abdul Hadi**
-* **Muhammad Shahmeer**
-
----
-
-### **SUBMITTED BY (GROUP OF 5 STUDENTS):**
+## **SUBMITTED BY (GROUP OF 5 STUDENTS):**
 | Student Name          |
 | :-------------------- |
 | **Moeed S-E** |
@@ -25,7 +16,6 @@ To aid in editing or reviewing, use the absolute clickable directory map below t
 * **Scheduled Telemetry Cron:** `IngestTelemetry.php`
 * **Interactive Frontend Dashboard:** `dashboard.blade.php`
 * **Vanilla JavaScript Actions:** `app.js`
-* **Academic Submission Details:** `numl_semester_project_report.md`
 
 ---
 
