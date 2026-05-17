@@ -1,58 +1,236 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+## 👥 Development Team
+* **Moeed S-E**
+* **Haseeb**
+* **Mohsin**
+* **Abdul Hadi**
+* **Muhammad Shahmeer**
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+---
 
-## About Laravel
+### **SUBMITTED BY (GROUP OF 5 STUDENTS):**
+| Student Name          |
+| :-------------------- |
+| **Moeed S-E** |
+| **Haseeb** |
+| **Mohsin** |
+| **Abdul Hadi** |
+| **Muhammad Shahmeer** | 
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+---
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## 📂 Core Developer Architecture & File Map
+To aid in editing or reviewing, use the absolute clickable directory map below to navigate the codebase:
+* **Ingestion & Anomaly Engine:** `MetricController.php`
+* **Mock Simulation Controller:** `AlertController.php`
+* **Scheduled Telemetry Cron:** `IngestTelemetry.php`
+* **Interactive Frontend Dashboard:** `dashboard.blade.php`
+* **Vanilla JavaScript Actions:** `app.js`
+* **Academic Submission Details:** `numl_semester_project_report.md`
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+---
 
-## Learning Laravel
+## 🔬 Problem-Solving Characteristics & Depth Analysis
+1. **Depth of Knowledge Required:**
+   NetGuard bypasses generic, standard CRUD architectures by utilizing statistical window aggregation. It requires understanding databases, rolling windows in SQL (`id < current` filters), API integration lifecycle, real-time charting, and secure state handling (CSRF protection in vanilla JavaScript).
+2. **Depth of Analysis Required:**
+   Detecting security threat vectors requires conceptual models. While a simple static limit catches standard overflows, a slow-building memory leak or sudden volumetric DDoS requires analyzing the delta of activity relative to standard baselines. 
+   
+   The mathematical ratio comparison models real-world production setups similar to monitoring platforms like Prometheus Alertmanager and AWS CloudWatch:
+   $$x > 4\mu$$
+3. **Consequences & Application:**
+   An improperly calibrated monitoring system generates false alarms (alert fatigue) or misses massive outages. Implemented as an asynchronous event logger, NetGuard models real industrial network environments, displaying high applicability in modern infrastructure operations.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+---
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## 📥 Clone & Run Guide
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+The system is designed to run on local environments with zero external database server requirements using **SQLite**. Follow the sequential steps below to get the project up and running.
 
-## Agentic Development
-
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
-
+### 1. Clone the Repository
 ```bash
-composer require laravel/boost --dev
+git clone https://github.com/Moeed-S-E/NetGuard-Simulation.git
 
-php artisan boost:install
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+### 2. Move Into Project Directory
 
-## Contributing
+```bash
+cd NetGuard-Simulation
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+```
 
-## Code of Conduct
+### 3. Install PHP Dependencies
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+```bash
+composer install
 
-## Security Vulnerabilities
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### 4. Install Frontend Dependencies
 
-## License
+```bash
+npm install
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+```
+
+### 5. Create Environment File
+
+#### Linux / macOS
+
+```bash
+cp .env.example .env
+
+```
+
+#### Windows (CMD)
+
+```cmd
+copy .env.example .env
+
+```
+
+### 6. Generate Laravel Application Key
+
+```bash
+php artisan key:generate
+
+```
+
+### 7. Create SQLite Database File
+
+#### Linux / macOS
+
+```bash
+touch database/database.sqlite
+
+```
+
+#### Windows (CMD)
+
+```cmd
+type nul > database\database.sqlite
+
+```
+
+### 8. Configure `.env`
+
+Open `.env` and update the database section:
+
+```env
+DB_CONNECTION=sqlite
+# Remove/comment other DB lines if needed
+
+```
+
+### 9. Run Migrations & Seed Database
+
+```bash
+php artisan migrate:fresh --seed
+
+```
+
+This will:
+
+* Create all tables
+* Insert baseline telemetry data
+* Seed nodes and alerts
+
+### 10. Start Laravel Server (Terminal 1)
+
+```bash
+php artisan serve
+
+```
+
+Laravel will start on: `http://127.0.0.1:8000`
+
+### 11. Start Telemetry Scheduler (Terminal 2)
+
+```bash
+php artisan schedule:work
+
+```
+
+This continuously generates simulated telemetry metrics in the background.
+
+### 12. Build Frontend Assets (Terminal 3)
+
+#### Development Mode
+
+```bash
+npm run dev
+
+```
+
+#### Production Build
+
+```bash
+npm run build
+
+```
+
+---
+
+## ✅ Functional Demonstration
+
+After opening the dashboard:
+
+* Real-time charts update automatically
+* Node cards refresh every 3 seconds
+* Alerts appear dynamically
+* Threat simulation buttons trigger anomalies
+
+**Try simulating live issues:**
+
+* ⚡ Simulate DDoS
+* ⚠ Memory Leak
+* ▲ CPU Spike
+
+Then, resolve incidents using the UI **RESOLVE** button.
+
+---
+
+## 🛠️ Common Fixes
+
+### Vite Manifest Error
+
+Run either of the following commands to rebuild assets:
+
+```bash
+npm run build
+
+```
+
+or:
+
+```bash
+npm run dev
+
+```
+
+### SQLite Driver Missing
+
+Enable the SQLite extensions in your system's active `php.ini` file:
+
+```ini
+extension=pdo_sqlite
+extension=sqlite3
+
+```
+
+### Permission Errors (Linux)
+
+If the application cannot write logs or cache files, grant the necessary permissions:
+
+```bash
+chmod -R 775 storage bootstrap/cache
+
+```
+
+---
+
+## 📦 Tech Stack
+
+* **Backend:** PHP 8.2+ / Laravel 11
+* **Database:** SQLite
+* **Frontend:** Vanilla JavaScript / Chart.js / Vite

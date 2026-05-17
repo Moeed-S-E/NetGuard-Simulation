@@ -8,7 +8,7 @@ use App\Models\Node;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
-class MetricsController extends Controller
+class MetricController extends Controller
 {
     /**
      * GET /api/metrics

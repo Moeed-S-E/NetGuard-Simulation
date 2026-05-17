@@ -168,12 +168,20 @@ class AlertController extends Controller
 
         $node = Node::findOrFail($nodeId);
 
-        // Persist the crafted metric row
-        $metric = Metric::create(array_merge(['node_id' => $node->id], $payload));
+        // Route through MetricController@store so FR-2 threshold checks
+        // and FR-3 rolling-average anomaly detection both execute.
+        $metricRequest = Request::create('/api/metrics', 'POST', array_merge(
+            ['node_id' => $node->id],
+            $payload
+        ));
 
-        // Create a named alert for the simulation type immediately
-        // (the anomaly engine in MetricsController would catch it too,
-        //  but here we name it explicitly for the demo UI)
+        $metricController = app(MetricController::class);
+        $metricResponse   = $metricController->store($metricRequest);
+        $metricData       = json_decode($metricResponse->getContent(), true);
+
+        // Also create a named alert for the simulation type so the UI
+        // shows a clear, human-readable label alongside any auto-generated
+        // anomaly alerts from the pipeline.
         $description = match ($alertType) {
             Alert::TYPE_DDOS        => "Simulated DDoS attack: request_rate={$payload['request_rate']}, error_rate={$payload['error_rate']}%",
             Alert::TYPE_MEMORY_LEAK => "Simulated memory leak: memory_usage={$payload['memory_usage']} MB",
@@ -195,7 +203,7 @@ class AlertController extends Controller
         return response()->json([
             'success'     => true,
             'message'     => "{$alertType} simulation injected into node '{$node->name}'.",
-            'metric'      => $metric,
+            'metric'      => $metricData['data'] ?? null,
             'alert'       => $alert,
             'node_status' => $node->status,
         ], 201);
